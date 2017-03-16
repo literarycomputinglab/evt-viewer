@@ -51,6 +51,9 @@ angular.module('evtviewer.buttonSwitch')
                 case 'itl':
                     evtIcon = 'icon-evt_link';
                     break;
+                case 'keyboard':
+                    evtIcon = 'icon-evt_keyboard';
+                    break;
                 case 'list':
                     evtIcon = 'icon-evt_list';
                     break;
@@ -86,6 +89,15 @@ angular.module('evtviewer.buttonSwitch')
                     break;
                 case 'search':
                     evtIcon = 'icon-evt_search';
+                    break;
+                case 'search-advanced':
+                    evtIcon = 'icon-evt_advanced-search';
+                    break;
+                case 'search-results-hide':
+                    evtIcon = 'icon-evt_search-results-close';
+                    break;
+                case 'search-results-show':
+                    evtIcon = 'icon-evt_search-results-open';
                     break;
                 case 'bookmark':
                     evtIcon = 'icon-evt_bookmark';
