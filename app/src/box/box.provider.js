@@ -155,6 +155,7 @@ angular.module('evtviewer.box')
                     topBoxOpened  : false,
                     fontSizeBtn   : false,
                     fontSize      : '100',
+                    searchBtn     : false,
                     topBoxContent : ''
                 },
                 appFilters = [],
@@ -164,7 +165,13 @@ angular.module('evtviewer.box')
             var genericTools = {
                 fontSizeBtn   : [ {title: 'Reset font size', label: '', icon: 'font-size-reset', type: 'fontSizeReset'},
                                 {title: 'Decrease font size', label: '', icon: 'font-size-minus', type: 'fontSizeDecrease'},
-                                {title: 'Increase font size', label: '', icon: 'font-size-plus', type: 'fontSizeIncrease'}]
+                                {title: 'Increase font size', label: '', icon: 'font-size-plus', type: 'fontSizeIncrease'}],
+                searchBtn     : [ {title: 'Show Results', label: '', icon: 'search-results-show', type: ''},
+                                {title: 'Advanced Search', label: '', icon: 'search-advanced', type: ''},
+                                {title: 'Virtual Keyboard', label: '', icon: 'keyboard', type: ''},
+                                {title: 'Previous', label: '', icon: 'previous', type: ''},
+                                {title: 'Next', label: '', icon: 'next', type: ''},
+                                {title: 'Search', label: '', icon: 'search', type: ''}]
             };
 
             var scopeHelper = {};
@@ -238,7 +245,7 @@ angular.module('evtviewer.box')
                     if (config.toolHeatMap) {
                         bottomMenuList.buttons.push({title: 'Heat Map', label: 'Heat Map', icon: 'heatmap', type: 'heatmap', show: function(){ return vm.type === 'text' && vm.edition === 'critical'; }});
                     }
-                    bottomMenuList.buttons.push({title: 'Search', label: 'Search', icon: 'search', type: '', show: function(){return 'true';} });
+                    bottomMenuList.buttons.push({title: 'Search', label: 'Search', icon: 'search', type: 'searchTools', show: function(){ return true; }});
                     bottomMenuList.buttons.push({title: 'Change font size', label: '', icon: 'font-size', type: 'fontSizeTools', show: function(){ return true; }});
 
                     updateContent = function(){

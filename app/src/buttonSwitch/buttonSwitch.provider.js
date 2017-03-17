@@ -332,16 +332,10 @@ angular.module('evtviewer.buttonSwitch')
                         evtInterface.updateUrl();
                     };
                     break;
-                case 'searchInEdition':
+                case 'searchTools':
                     callback = function(){
-                        var edition = scope.$parent.vm.edition;
-                        alert('Search in edition level '+edition+'. Coming Soon...');
-                    };
-                    break;
-                case 'searchInWit':
-                    callback = function(){
-                        var wit = scope.$parent.vm.witness;
-                        alert('Search in witness '+wit+'. Coming Soon...');
+                        var searchBtnState = scope.$parent.vm.getState('searchBtn') || false;
+                        scope.$parent.vm.updateState('searchBtn', !searchBtnState);
                     };
                     break;
                 case 'share':
