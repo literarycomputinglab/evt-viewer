@@ -8,7 +8,7 @@ angular.module('evtviewer.buttonSwitch')
         defaults = _defaults;
     };
 
-    this.$get = function($timeout, $log, parsedData, evtInterface, evtDialog, evtSelect, Utils, evtImageTextLinking) {
+    this.$get = function($timeout, $log, parsedData, evtInterface, evtDialog, evtSelect, Utils, evtImageTextLinking, evtSearchBox) {
         var button    = {},
             collection = {},
             list       = [],
@@ -334,9 +334,11 @@ angular.module('evtviewer.buttonSwitch')
                     break;
                 case 'searchTools':
                     callback = function(){
-                        var searchBtnState = scope.$parent.vm.getState('searchBtn') || false;
-                        scope.$parent.vm.updateState('searchBtn', !searchBtnState);
+                        var searchBtnState = evtSearchBox.openBox('searchBtn');
                     };
+                    fakeCallback = function() {
+                       return callback();
+                    }
                     break;
                 case 'share':
                     callback = function(){
