@@ -35,6 +35,7 @@
 
     "toolHeatMap"       : true,
     "toolPinAppEntries" : false,
+    "searchBoxPosition" : "",
 
     "listDef"                    : "listWit, listChange",
     "versionDef"                 : "witness, change",
