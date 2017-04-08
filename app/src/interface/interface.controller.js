@@ -142,6 +142,10 @@ angular.module('evtviewer.interface')
         output += '</div>';
         return output;
     };
+    
+    $scope.getSearchBoxPosition = function() {
+		return GLOBALCONFIG.searchBoxPosition;
+    };
 
     $scope.getErrorMsg = function(){
         return evtCommunication.getError();

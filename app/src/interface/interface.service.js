@@ -10,7 +10,8 @@ angular.module('evtviewer.interface')
             currentWitsPages : undefined,
             currentEdition   : undefined,
             currentAppEntry  : undefined,
-            currentHighlightedZone: undefined,
+            currentHighlightedZone : undefined,
+			currentSearchBoxPosition : '',
             isLoading        : true,
             isPinnedAppBoardOpened : false,
             secondaryContent : ''
@@ -30,6 +31,8 @@ angular.module('evtviewer.interface')
             evtCommunication.getExternalConfig(config.configUrl).then(function(){
                 properties.indexTitle         = config.indexTitle;
                 properties.availableViewModes = config.availableViewModes;
+				state.currentSearchBoxPosition = config.searchBoxPosition;
+				mainInterface.getSearchBoxPositionAlert();
                 evtCommunication.getData(config.dataUrl).then(function () {
                     mainInterface.updateParams($routeParams);
                     
@@ -154,6 +157,17 @@ angular.module('evtviewer.interface')
         mainInterface.getSecondaryContentOpened = function(){
             return state.secondaryContent;
         };
+	
+		mainInterface.getSearchBoxPositionAlert = function() {
+			var avaiblePos = GLOBALCONFIG.avaibleSearchBoxPositions;
+			var currentPos = state.currentSearchBoxPosition;
+			
+			if(!avaiblePos.includes(currentPos)) {
+				var msg = "La posizione scelta per il box di ricerca non è valida.\nLa funzionalità di ricerca non verrà visualizzata.\nPer visualizzare le posizioni valide [da inserire]"
+				alert(msg);
+			}
+			
+		};
 
         /* ************** */
         /* PARAMS UPDATES */

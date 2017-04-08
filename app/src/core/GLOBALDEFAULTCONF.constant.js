@@ -100,9 +100,14 @@ angular.module('evtviewer.core')
                                 viewMode : 'collation',
                                 visible  : true
                             }],
-
+	avaibleSearchBoxPositions : [
+		'internal',
+		'external'
+	],
+	
     toolHeatMap : true,
     toolPinAppEntries : false,
+    searchBoxPosition : "internal",
     
     listDef                    : 'listWit, listChange',
     versionDef                 : 'witness, change',
