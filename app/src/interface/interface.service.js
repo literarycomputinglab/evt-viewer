@@ -12,6 +12,7 @@ angular.module('evtviewer.interface')
             currentAppEntry  : undefined,
             currentHighlightedZone : undefined,
 			currentSearchBoxPosition : '',
+			isSearchBoxOpened : false,
             isLoading        : true,
             isPinnedAppBoardOpened : false,
             secondaryContent : ''
@@ -156,6 +157,10 @@ angular.module('evtviewer.interface')
         mainInterface.getSecondaryContentOpened = function(){
             return state.secondaryContent;
         };
+	
+		mainInterface.isSearchBoxOpened = function() {
+			return state.isSearchBoxOpened;
+		}
 
         /* ************** */
         /* PARAMS UPDATES */
@@ -167,6 +172,10 @@ angular.module('evtviewer.interface')
         mainInterface.togglePinnedAppBoardOpened = function() {
             state.isPinnedAppBoardOpened = !state.isPinnedAppBoardOpened;
         };
+	
+		mainInterface.toogleSearchBoxOpened = function() {
+			state.isSearchBoxOpened = !state.isSearchBoxOpened;
+		}
         
         mainInterface.setToolState = function(toolName, status) {
             if (!tools[toolName]) {

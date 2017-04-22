@@ -179,6 +179,10 @@
                     ng-repeat="witness in getAvailableWitnesses()">{{getWitness(witness)}}</span>
             </div>
 
+			<evt-search-box 
+                ng-controller="SearchBoxCtrl as searchBox"
+                ng-show="searchBox.getPosition()=='external'"> 
+            </evt-search-box>
         </section>       
 
         <!-- TXT TXT -->
@@ -198,6 +202,10 @@
             <box data-type="text"
                  data-edition="{{getCurrentEdition()}}"
                  id="mainText"></box>
+			<evt-search-box 
+                ng-controller="SearchBoxCtrl as searchBox"
+                ng-show="searchBox.getPosition()=='external'"> 
+            </evt-search-box>
         </section>
 
         <!-- LOADING... -->
@@ -357,7 +365,7 @@
     <script src="/src/tabsContainer/tabsContainer.directive.js"></script>
         
     <script src="/src/search/search.js"></script>
-    <script src="/src/search/search.configuration.js"></script>
+    <script src="/src/search/searchBox.configuration.js"></script>
     <script src="/src/search/searchBox.directive.js"></script>
     <script src="/src/search/searchBox.controller.js"></script>
     <script src="/src/search/searchBox.provider.js"></script>

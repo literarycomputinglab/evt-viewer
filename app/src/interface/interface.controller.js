@@ -89,6 +89,10 @@ angular.module('evtviewer.interface')
     $scope.isToolAvailable = function(toolName){
         return evtInterface.isToolAvailable(toolName);
     };
+	
+	$scope.isSearchBoxOpened = function(){
+		return evtInterface.isSearchBoxOpened();
+    };
 
     $scope.getSecondaryContentOpened = function(){
         return evtInterface.getSecondaryContentOpened();
