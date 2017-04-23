@@ -8,7 +8,7 @@ angular.module('evtviewer.box')
         defaults = _defaults;
     };
 
-    this.$get = function($log, $q, $timeout, config, parsedData, evtParser, evtCriticalParser, xmlParser, evtInterface, evtImageTextLinking) {
+    this.$get = function($log, $q, $timeout, config, parsedData, evtParser, evtCriticalParser, xmlParser, evtInterface, evtImageTextLinking, evtSearchBox) {
         var box        = {},
             collection = {},
             list       = [],
@@ -238,7 +238,7 @@ angular.module('evtviewer.box')
                     if (config.toolHeatMap) {
                         bottomMenuList.buttons.push({title: 'Heat Map', label: 'Heat Map', icon: 'heatmap', type: 'heatmap', show: function(){ return vm.type === 'text' && vm.edition === 'critical'; }});
                     }
-                    bottomMenuList.buttons.push({title: 'Search', label: 'Search', icon: 'search', type: 'searchTools', show: function(){ return config.searchBoxPosition=='internal' || config.searchBoxPosition==undefined;}});
+                    bottomMenuList.buttons.push({title: 'Search', label: 'Search', icon: 'search', type: 'searchTools', show: function(){ return evtSearchBox.getCurrentPosition() == 'internal'}});
                     bottomMenuList.buttons.push({title: 'Change font size', label: '', icon: 'font-size', type: 'fontSizeTools', show: function(){ return true; }});
 
                     updateContent = function(){
