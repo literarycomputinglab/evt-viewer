@@ -2,7 +2,7 @@ angular.module('evtviewer.core')
 
 .constant('GLOBALDEFAULTCONF', {
 
-    // TODO: select doc system 
+    // TODO: select doc system
     /**
      * @module evtviewerCore
      * @ngdoc object
@@ -62,15 +62,16 @@ angular.module('evtviewer.core')
      * <pre> configUrl: 'config/config.json' </pre>
      */
     configUrl       : '../../config/config.json',
-    
+
 
     dataUrl          : '../../data/pseudo-edition-test-file_mod.xml',
+    /*dataUrl          : '../../data/DOTR.xml',*/
     preferredWitness : 'A',
     skipWitnesses    : '',
 
     indexTitle       : 'EVT Critical Viewer',
     webSite          : '',
-    
+
     editionType        : 'critical',
 
     defaultViewMode    : 'readingTxt',
@@ -100,15 +101,9 @@ angular.module('evtviewer.core')
                                 viewMode : 'collation',
                                 visible  : true
                             }],
-	availableSearchBoxPositions : [
-		'internal',
-		'external'
-	],
-	
     toolHeatMap : true,
     toolPinAppEntries : false,
-    searchBoxPosition : 'internal',
-    
+
     listDef                    : 'listWit, listChange',
     versionDef                 : 'witness, change',
     fragmentMilestone          : '<witStart>, <witEnd>',
@@ -126,7 +121,7 @@ angular.module('evtviewer.core')
     genericColors : ['rgb(52, 197, 173)', 'rgb(238, 194, 66)', 'rgb(253, 153, 54)', 'rgb(253, 95, 58)',
                      'rgb(235, 77, 153)', 'rgb(252, 144, 172)', 'rgb(171, 99, 219)', 'rgb(67, 135, 217)',
                      'rgb(163, 207, 81)', 'rgb(238, 194, 66)', 'rgb(228, 99, 220)', 'rgb(124, 113, 232)'],
-    
+
     variantColorLight : 'rgb(208, 220, 255)',
     variantColorDark  : 'rgb(101, 138, 255)',
     heatmapColor      : 'rgb(255, 108, 63)',
