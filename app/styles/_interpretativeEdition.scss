@@ -17,13 +17,22 @@
 	}
 
 
-	//TEMP. TODO: creare direttiva apposita per GLYPHs
+	//TEMP. TODO: creare direttiva apposita per GLYPHs and CHARs
 	.glyph {
 		.glyphname, .mapping {
 			display: none;
 		}
 
-		.mapping[data-type="interpretative"] {
+		.mapping[data-type="interpretative"], .mapping[data-type="normalized"] {
+			display: inline;
+		}
+	}
+	.char {
+		.charname, .mapping {
+			display: none;
+		}
+
+		.mapping[data-type="interpretative"], .mapping[data-type="normalized"] {
 			display: inline;
 		}
 	}

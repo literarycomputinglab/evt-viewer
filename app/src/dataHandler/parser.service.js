@@ -45,9 +45,11 @@ angular.module('evtviewer.dataHandler')
     parser.parseXMLElement = function(doc, element, skip) {
         var newElement;
         if (element.nodeType === 3) { // Text
-            newElement = document.createElement('span');
-            newElement.className = 'textNode';
-            newElement.appendChild(element);
+                newElement = document.createElement('span');
+                newElement.className = 'textNode';
+            if (element.textContent.trim() !== '') {
+                newElement.appendChild(element);
+            }
         } else if (element.tagName !== undefined && skip.indexOf('<'+element.tagName.toLowerCase()+'>') >= 0) {
             newElement = element;
         } else {
@@ -207,14 +209,33 @@ angular.module('evtviewer.dataHandler')
     
     parser.parseGlyphs = function(doc) {
         var currentDocument = angular.element(doc);
-        angular.forEach(currentDocument.find('glyph'), 
+        angular.forEach(currentDocument.find('glyph, char'), 
             function(element) {
                 var glyph = { };
                 glyph.id = element.getAttribute('xml:id') || '';
                 glyph.xmlCode = element.outerHTML;
+                glyph.mapping = {};
+                angular.forEach(angular.element(element).find('mapping'), 
+                    function(mapping) {
+                        var sType = mapping.getAttribute("type");
+                        glyph.mapping[sType] = {
+                            element: mapping.outerHTML,
+                            content: mapping.innerHTML,
+                            attributes: []
+                        };
+                        for (var i = 0; i < mapping.attributes.length; i++) {
+                            var attrib = mapping.attributes[i];
+                            if (attrib.specified) {
+                                glyph.mapping[sType].attributes.push({ name: attrib.name, value: attrib.value });
+                            }
+                        }
+                    });
+                var parsedXmlElem = parser.parseXMLElement(doc, element, '');
+                glyph.parsedXml = parsedXmlElem ? parsedXmlElem.outerHTML : '';
                 //TODO: decide how to structure content
                 parsedData.addGlyph(glyph);
             });
+        console.log('# GLYPHS #', parsedData.getGlyphs());
     };
 
     parser.xpath = function(el) {
@@ -414,21 +435,21 @@ angular.module('evtviewer.dataHandler')
                     }
                 }
             }
-            
             var Gs = docDOM.getElementsByTagName('g');
             k = 0;
             while ( k < Gs.length) {
                 var gNode = Gs[k],
-                    sRef = gNode.getAttribute('ref'),
-                    glyphNode;
-                if (sRef && sRef !== '') {
-                    sRef = sRef.replace('#', '');
-                    var glyphObj = parsedData.getGlyph(sRef);
-                    if (glyphObj && glyphObj.xmlCode !== '') {
-                        var glyphNodes = angular.element(glyphObj.xmlCode);
-                        if (glyphNodes && glyphNodes.length > 0) {
-                            glyphNode = glyphNodes[0];
-                        }
+                    ref = gNode.getAttribute('ref'),
+                    glyphNode = document.createElement('span');
+                glyphNode.className = 'glyph';
+
+                if (ref && ref !== '') {
+                    ref = ref.replace('#', '');
+                    var edition = editionLevel;
+                    edition = edition === 'interpretative' ? 'normalized' : edition;
+                    var glyphMappingForEdition = parsedData.getGlyphMappingForEdition(ref, edition);
+                    if (glyphMappingForEdition) {
+                        glyphNode.appendChild(angular.element(glyphMappingForEdition.element)[0]);
                     }
                 }
                 if (glyphNode) {
@@ -437,8 +458,8 @@ angular.module('evtviewer.dataHandler')
                 } 
                 gNode.parentNode.removeChild(gNode);
             }
-            docDOM.innerHTML = docDOM.innerHTML.replace(/>[\s\r\n]*?</g,'><');
 
+            docDOM.innerHTML = docDOM.innerHTML.replace(/>[\s\r\n]*?</g,'><');
             angular.forEach(docDOM.children, function(elem){
                 var skip = '<pb>,<g>';
                 elem.parentNode.replaceChild(parser.parseXMLElement(doc, elem, skip), elem);
