@@ -447,6 +447,9 @@ angular.module('evtviewer.dataHandler')
                     ref = ref.replace('#', '');
                     var edition = editionLevel;
                     edition = edition === 'interpretative' ? 'normalized' : edition;
+                    if (parser.isNestedInElem(gNode, 'abbr') || parser.isNestedInElem(gNode, 'orig')) { 
+                        edition = 'diplomatic'; 
+                    }
                     var glyphMappingForEdition = parsedData.getGlyphMappingForEdition(ref, edition);
                     if (glyphMappingForEdition) {
                         glyphNode.appendChild(angular.element(glyphMappingForEdition.element)[0]);
