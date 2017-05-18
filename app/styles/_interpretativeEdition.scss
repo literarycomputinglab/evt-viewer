@@ -3,215 +3,252 @@
 /* *************************** */
 
 .interpretativeEdition {
-	// Abbreviations and Their Expansions 
-	.choice {
-		>.abbr {
-			display: none;
-		}
-		.expan { }
-	}
+    // Abbreviations and Their Expansions
+    .choice {
+        > .abbr {
+            display: none;
+        }
 
-	// Additions, Deletions, and Omissions
-	.add { 
-		&[data-place='above'] { }
-	}
+        .expan {}
+    }
 
+    // Additions, Deletions, and Omissions
+    .add {
+        &[data-place='above'] {}
+    }
 
-	//TEMP. TODO: creare direttiva apposita per GLYPHs and CHARs
-	.glyph {
-		.glyphname, .mapping {
-			display: none;
-		}
+    //TEMP. TODO: creare direttiva apposita per GLYPHs and CHARs
+    .glyph {
+        .glyphname, .mapping {
+            display: none;
+        }
 
-		.mapping[data-type="interpretative"], .mapping[data-type="normalized"] {
-			display: inline;
-		}
-	}
-	.char {
-		.charname, .mapping {
-			display: none;
-		}
+        .mapping[data-type="interpretative"], .mapping[data-type="normalized"] {
+            display: inline;
+        }
+    }
 
-		.mapping[data-type="interpretative"], .mapping[data-type="normalized"] {
-			display: inline;
-		}
-	}
+    .char {
+        .charname, .mapping {
+            display: none;
+        }
 
+        .mapping[data-type="interpretative"], .mapping[data-type="normalized"] {
+            display: inline;
+        }
+    }
 
-	.choice {
-		display: inline;
-		
-		&:before, &:after {
-			content: " ";
-		}
+    .choice {
+        display: inline;
 
-		.orig {
-			font-size: 80%;
-			position: absolute;
-			line-height: 16px;
-			display: none;
-			border: 2.5px solid black;
-			border-radius: 3px;
-			@include set(box-shadow, 2px 2px 2px #7e7067);
-			padding: 0.4%;
-			margin-top: 30px; 
+        &:before, &:after {
+            content: " ";
+        }
 
-			&:before {
-				content: url("../images/popup_before.png");
-				left: 15%;
-				position: absolute;
-				top: -13px;
-			}
-		}
-		
-		.orig, .orig * {
-			background: #e5dac4 !important;
-		}
+        .corr, .orig {
+            font-size: 80%;
+            position: absolute;
+            line-height: 16px;
+            display: none;
+            border: 2.5px solid black;
+            border-radius: 3px;
 
-		.reg { 
-			color: #69513a;
-			&:hover, &.hover {
-				color: #561c0a;
-			}
-		}
-		&:hover, &.hover {
-			.orig {
-				display: inline;
-				min-width: 20px;
-				text-align: center; 
-			}
+            @include set(box-shadow, 2px 2px 2px #7e7067);
 
-			.reg { 
-				text-decoration: underline; 
-			}
-		} 
+            padding: 0.4%;
+            margin-top: 30px;
 
-		.sup {
-		    line-height: 20px;
-			vertical-align: 20%; 
-		}
+            &:before {
+                content: url("../images/popup_before.png");
+                left: 15%;
+                position: absolute;
+                top: -13px;
+            }
+        }
 
-		.under {
-		    line-height: 20px;
-			vertical-align: -20%; 
-		}
-	}
+        .corr {
+            &:before {
+                content: url("../images/popup_before_corr.png");
+            }
+        }
 
-	.sic  {
-		display: inline-table;
-		
-		&:before, &:after {
-			content: " ";
-		}
+        .corr, .corr * {
+            background: #f99069 !important;
+        }
 
-		.corr {
-			font-size: 80%;
-			position: absolute;
-			line-height: 16px;
-			display: none;
-			background: #f99069;
-			border: 2.5px solid black;
-			border-radius: 3px;
-			@include set(box-shadow, 2px 2px 2px #7e7067);
-			padding: 0.4%;
-			margin-top: 30px; 
-			
-			&:before {
-				content: url("../images/popup_before_corr.png");
-			 	left: 15%;
-			 	position: absolute;
-			 	top: -13px;
-			} 
-		}
+        .orig {
+            &:before {
+                content: url("../images/popup_before.png");
+            }
+        }
 
-		.sic { 
-			color: #934d4d;
-			&:hover, &.hover {
-				color: #561c0a;
-			}
-		}
+        .orig, .orig * {
+            background: #e5dac4 !important;
+        }
 
-		&:hover, &.hover {
-			.corr {
-				display: inline;
-				min-width: 20px;
-				text-align: center; 
-			}
+        .reg {
+            color: #69513a;
 
-			.sic { 
-				text-decoration: underline; 
-			}
-		} 
-	}
+            &:hover, &.hover {
+                color: #561c0a;
+            }
+        }
 
-	//TODO: reorder
-	.attachment{
-	    border: 1px solid black;
-	    padding: 5px 0px 0px 10px;
-	}
+        &:hover, &.hover {
+            .orig, .corr {
+                display: inline;
+                min-width: 30px;
+                text-align: center;
+            }
 
-	.ex { 
-		font-style: italic; 
-	}
+            .corr {
+                @include set(transform, translate(-80%, 0));
+            }
 
-	.lineN {
-		color: grey;
-		font-size: 0.8em; 
-	}
+            .reg {
+                text-decoration: underline;
+            }
+        }
 
-	.resp { 
-		font-weight: bold; 
-	}
+        .sic {
+            color: #934d4d;
 
-	.red { 
-		color: red; 
-	}
+            &:after {
+                content: "\00a0";
+                display: inline-block;
+            }
+        }
 
-	.hi {
-		&[data-rend="7init"] {
-			font-size: 140% 
-		}
+        .sup {
+            line-height: 20px;
+            vertical-align: 20%;
+        }
 
-		&[data-rend="init3.1"] { 
-			font-size: 120%; /*font-weight: bold;*/ 
-		}
+        .under {
+            line-height: 20px;
+            vertical-align: -20%;
+        }
+    }
 
-		&[data-rend="cap"] { 
-			text-transform: uppercase; 
-		}
+    .choice {
+        display: inline-table;
 
-		&[data-rend="double"] { 
-			font-size: 120%; 
-		}
-	}
+        &:before, &:after {
+            content: " ";
+        }
 
-	.ex { 
-		font-style: italic; 
-	}
+        .corr {
+            font-size: 80%;
+            position: absolute;
+            line-height: 16px;
+            display: none;
+            background: #f99069;
+            border: 2.5px solid black;
+            border-radius: 3px;
 
+            @include set(box-shadow, 2px 2px 2px #7e7067);
 
-	.zone{
-		margin-bottom: 5px; 
-	}
-	.p {
-		display: block;
-	}
-	
+            padding: 0.4%;
+            margin-top: 30px;
 
-	.center, [rend="center"] {
-		text-align: center;
-	    width: 92%;
-	    display: inline-table;
-	    background:#FFF;
-	}
+            &:before {
+                content: url("../images/popup_before_corr.png");
+                left: 15%;
+                position: absolute;
+                top: -13px;
+            }
+        }
 
-	.right, [rend="right"] {
-		text-align: right;
-	    display: inline-table;
-	    background:#FFF; 
-	}
+        .sic {
+            color: #934d4d;
 
-	.left, [rend="left"]{
-	    display: inline-table;
-	}
+            &:hover, &.hover {
+                color: #561c0a;
+            }
+        }
+
+        &:hover, &.hover {
+            .corr {
+                display: inline;
+                min-width: 20px;
+                text-align: center;
+            }
+
+            .sic {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    //TODO: reorder
+    .attachment {
+        border: 1px solid black;
+        padding: 5px 0px 0px 10px;
+    }
+
+    .ex {
+        font-style: italic;
+    }
+
+    .lineN {
+        color: grey;
+        font-size: 0.8em;
+    }
+
+    .resp {
+        font-weight: bold;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .hi {
+        &[data-rend="7init"] {
+            font-size: 140%;
+        }
+
+        &[data-rend="init3.1"] {
+            font-size: 120%;
+
+            /*font-weight: bold;*/
+        }
+
+        &[data-rend="cap"] {
+            text-transform: uppercase;
+        }
+
+        &[data-rend="double"] {
+            font-size: 120%;
+        }
+    }
+
+    .ex {
+        font-style: italic;
+    }
+
+    .zone {
+        margin-bottom: 5px;
+    }
+
+    .p {
+        display: block;
+    }
+
+    .center, [rend="center"] {
+        text-align: center;
+        width: 92%;
+        display: inline-table;
+        background: #FFF;
+    }
+
+    .right, [rend="right"] {
+        text-align: right;
+        display: inline-table;
+        background: #FFF;
+    }
+
+    .left, [rend="left"] {
+        display: inline-table;
+    }
 }
