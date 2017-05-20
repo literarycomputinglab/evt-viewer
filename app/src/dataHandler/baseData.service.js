@@ -1,11 +1,12 @@
 angular.module('evtviewer.dataHandler')
 
-.service('baseData', function($log, $q, $http, config, xmlParser, evtParser, evtCriticalParser, evtProjectInfoParser, evtPrimarySourcesParser, evtDialog, evtSearchParser) {
+.service('baseData', function($log, $q, $http, config, xmlParser, evtParser, evtCriticalParser, evtProjectInfoParser, evtPrimarySourcesParser, evtDialog) {
     var baseData     = {},
         state        = {
             XMLDocuments: [],
             XMLStrings: []
-        };
+        },
+        docElements;
 
     var _console = $log.getInstance('baseData');
 
@@ -14,6 +15,10 @@ angular.module('evtviewer.dataHandler')
         var promises = [];
         promises.push(addXMLDocument(xmlString).promise);
         return $q.all(promises);
+    };
+
+    baseData.getXML = function() {
+      return docElements;
     };
 
     baseData.getXMLDocuments = function() {
@@ -26,7 +31,7 @@ angular.module('evtviewer.dataHandler')
     
     var addXMLDocument = function(doc) {
         var deferred = $q.defer();
-        var docElements = xmlParser.parse(doc);
+        docElements = xmlParser.parse(doc);
         if (docElements.documentElement.nodeName === 'TEI') {
             state.XMLStrings.push(doc);
             loadXIinclude(docElements).promise.then(function(){
