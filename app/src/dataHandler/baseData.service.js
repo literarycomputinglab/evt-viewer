@@ -50,24 +50,21 @@ angular.module('evtviewer.dataHandler')
     var launchXMLParsers = function(docElements) {
         // Parse pages
         // evtParser.parsePages(docElements);
-        
+
         // Parse Glyphs
         evtParser.parseGlyphs(docElements); //TODO: Decide if it is necessary to move this somewhere else
-        
+
         // Parse Zones
         evtPrimarySourcesParser.parseZones(docElements); //TODO: Decide if it is necessary to move this somewhere else
-        
+
         // Parse documents
         evtParser.parseDocuments(docElements);
 
         // Parse witnesses list
         evtCriticalParser.parseWitnesses(docElements);
-        
-        // Parse projet info 
-        evtProjectInfoParser.parseProjectInfo(docElements);
 
-        // Test search parser
-        evtSearchParser.parseWords(docElements);
+        // Parse projet info
+        evtProjectInfoParser.parseProjectInfo(docElements);
     };
 
     /* ************************** */
